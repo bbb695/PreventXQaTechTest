@@ -1,0 +1,17 @@
+﻿Inconsistant warnings for field errors, some fields display a red 'X' inside the field, others turn the labels and borders red and some just turn the borders red (bug on DOB div, class is not updated to include "has-error").
+	cannot sweep page for errors, need a custom check for each field
+No validation on Other Gender(free-text), would expect this field to be required when visible.
+No validation on missing mobile number or email only bad format.
+Email will not accept top level domains eg bob@com
+No support for international phone numbers (or uk numbers in international format).
+Unlike other selects, Country of birth cannot be empty, no way to validate that the user forgot to populate it.
+Invalid dates do not appear to get validated (eg 31/02/2020).
+		Neither do future dates.
+Form uses DOB not age, need to provide some way to convert between them. Tests will need to be able to specify a date or age.
+Should we be able to specify an age that is not a whole number? 
+	If there are any conditions that are triggered by age then we will need a way to test boundries down to the day!
+		if we use age in years 1 day would be 0.00274 years which would make the tests difficult to read.
+		if we use age in days 18 years old would be 6574.5 which would also be difficult to read.
+		Age in years and days would get confused by leap years .
+		age in years,+/-days.
+Password validation message only displayed if all other validations passed.
