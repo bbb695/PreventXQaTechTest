@@ -29,6 +29,7 @@ namespace PreventXQaTechTest.Models
         ConfirmPassword,
 
         ResearchConsent,
-        Terms
+        Terms,
+        NotSet
     }
 }

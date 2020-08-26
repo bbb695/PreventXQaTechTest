@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
@@ -38,26 +40,26 @@ namespace PreventXQaTechTest.Drivers.Base
                 case DriverType.Chrome:
                     ChromeOptions chromeOptions = new ChromeOptions();
                     //add chrome options here.
-                    webDriver = new ChromeDriver(chromeOptions);
+                    webDriver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), chromeOptions);
                     browserName = "Chrome";
                     break;
                 case DriverType.Edge:
                     EdgeOptions edgeOptions = new EdgeOptions();
                     //add edge options here.
-                    webDriver = new EdgeDriver(edgeOptions);
+                    webDriver = new EdgeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), edgeOptions);
                     //capabilities = ((RemoteWebDriver)webDriver).Capabilities;
                     browserName = "Edge";
                     break;
                 case DriverType.Ie:
                     InternetExplorerOptions ieOptions = new InternetExplorerOptions();
                     //add IE options here.
-                    webDriver = new InternetExplorerDriver(ieOptions);
+                    webDriver = new InternetExplorerDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), ieOptions);
                     browserName = "IE";
                     break;
                 case DriverType.FireFox:
                     FirefoxOptions fireFoxOptions = new FirefoxOptions();
                     //add firefox options here.
-                    webDriver = new FirefoxDriver();
+                    webDriver = new FirefoxDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
                     browserName = "FireFox";
                     break;
                 case DriverType.Phantom:

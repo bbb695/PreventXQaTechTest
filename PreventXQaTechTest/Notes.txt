@@ -15,3 +15,4 @@ Should we be able to specify an age that is not a whole number?
 		Age in years and days would get confused by leap years .
 		age in years,+/-days.
 Password validation message only displayed if all other validations passed.
+In test data; Gender, Sex and partner sex are int (assume index). Tests might be more readable and less fragile if these were text values.

@@ -8,6 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\AutomationTest.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\AutomationTest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
@@ -31,7 +41,6 @@
 
   <ItemGroup>
     <Folder Include="Hooks\" />
-    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

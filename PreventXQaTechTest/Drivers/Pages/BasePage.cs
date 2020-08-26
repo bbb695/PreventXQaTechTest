@@ -17,7 +17,7 @@ namespace PreventXQaTechTest.Drivers.Pages
 {
     public abstract class BasePage
     {
-        protected static log4net.ILog logger = log4net.LogManager.GetLogger(typeof(Logger));
+        protected static ILog logger = log4net.LogManager.GetLogger(typeof(Logger));
         protected BaseDriver baseDriver;
         protected IWebDriver driver;
       

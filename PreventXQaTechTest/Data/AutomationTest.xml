@@ -1,92 +1,55 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Registration title="TestCasesList">
-
-	
-<TestCase id="1" title="RegistrationData" description = "Validation triggered for Email Address">
-
-<TestCaseData complete="true">
-<FirstName>TestUser</FirstName>
-<LastName>AutomationTest</LastName>
-<Gender>1</Gender>
-<AssignedSex>2</AssignedSex>
-<PartnerSex>2</PartnerSex>
-<Age>18</Age>
-<DateOfBirth>18</DateOfBirth>
-<Ethnicity>British</Ethnicity>
-<Address1>TestAddress1</Address1>
-<TownCity>TestTownCity</TownCity>
-<County>TestCounty</County>
-<PostCode>PX11PX</PostCode>
-<EmailAddress></EmailAddress>
-<MobileNumber>07123456789</MobileNumber>
-<ContactPreference>SMS</ContactPreference>
-<Password>TestPassword</Password>
-<PasswordConfirm>TestPassword</PasswordConfirm>
-<ResearchConsent>Yes</ResearchConsent>
-<Terms>Yes</Terms>
-<Expected_Results_Validation>EmailAddress</Expected_Results_Validation>
-</TestCaseData>
-
-</TestCase>
-
-<TestCase id="2" title="RegistrationData" description = "Validation triggered for Email Address DOB on leap day">
-
-<TestCaseData complete="true">
-<FirstName>TestUser</FirstName>
-<LastName>AutomationTest</LastName>
-<Gender>1</Gender>
-<AssignedSex>2</AssignedSex>
-<PartnerSex>2</PartnerSex>
-<Age></Age>
-<DateOfBirth>29/02/1996</DateOfBirth>
-<Ethnicity>British</Ethnicity>
-<Address1>TestAddress1</Address1>
-<Address2>TestAddress Line 2</Address2>
-<TownCity>TestTownCity</TownCity>
-<County>TestCounty</County>
-<PostCode>PX11PX</PostCode>
-<EmailAddress></EmailAddress>
-<MobileNumber>07123456789</MobileNumber>
-<ContactPreference>SMS</ContactPreference>
-<Password>TestPassword</Password>
-<PasswordConfirm>TestPassword</PasswordConfirm>
-<ResearchConsent>Yes</ResearchConsent>
-<Terms>Yes</Terms>
-<Expected_Results_Validation>EmailAddress</Expected_Results_Validation>
-</TestCaseData>
-
-</TestCase>
-  
-  <TestCase id="2" title="RegistrationData" description = "Validation triggered for Email Address DOB on leap day">
-
-<TestCaseData complete="true">
-<FirstName>TestUser</FirstName>
-<LastName>AutomationTest</LastName>
-<Gender>1</Gender>
-<AssignedSex>2</AssignedSex>
-<PartnerSex>2</PartnerSex>
-<Age></Age>
-<DateOfBirth>29/02/1996</DateOfBirth>
-<Ethnicity>British</Ethnicity>
-<Address1>TestAddress1</Address1>
-<Address2>TestAddress Line 2</Address2>
-<TownCity>TestTownCity</TownCity>
-<County>TestCounty</County>
-<PostCode>PX11PX</PostCode>
-<EmailAddress></EmailAddress>
-<MobileNumber>07123456789</MobileNumber>
-<ContactPreference>SMS</ContactPreference>
-<Password>TestPassword</Password>
-<PasswordConfirm>TestPassword</PasswordConfirm>
-<ResearchConsent>Yes</ResearchConsent>
-<Terms>Yes</Terms>
-<Expected_Results_Validation>EmailAddress</Expected_Results_Validation>
-</TestCaseData>
-
-</TestCase>
-
-  <TestCase id="3" title="RegistrationData" description = "Validation triggered for Email Address DOB invalid day">
-
+  <TestCase id="1" title="RegistrationData" description="Validation triggered for Email Address">
+    <TestCaseData complete="true">
+      <FirstName>TestUser</FirstName>
+      <LastName>AutomationTest</LastName>
+      <Gender>1</Gender>
+      <AssignedSex>2</AssignedSex>
+      <PartnerSex>2</PartnerSex>
+      <Age>18</Age>
+      <DateOfBirth>18</DateOfBirth>
+      <Ethnicity>British</Ethnicity>
+      <Address1>TestAddress1</Address1>
+      <TownCity>TestTownCity</TownCity>
+      <County>TestCounty</County>
+      <PostCode>PX11PX</PostCode>
+      <EmailAddress></EmailAddress>
+      <MobileNumber>07123456789</MobileNumber>
+      <ContactPreference>SMS</ContactPreference>
+      <Password>TestPassword</Password>
+      <ConfirmPassword>TestPassword</ConfirmPassword>
+      <ResearchConsent>Yes</ResearchConsent>
+      <Terms>Yes</Terms>
+      <Expected_Results_Validation>EmailAddress</Expected_Results_Validation>
+    </TestCaseData>
+  </TestCase>
+  <TestCase id="2" title="RegistrationData" description="Validation triggered for Email Address DOB on leap day">
+    <TestCaseData complete="true">
+      <FirstName>TestUser</FirstName>
+      <LastName>AutomationTest</LastName>
+      <Gender>1</Gender>
+      <AssignedSex>2</AssignedSex>
+      <PartnerSex>2</PartnerSex>
+      <Age></Age>
+      <DateOfBirth>29/02/1996</DateOfBirth>
+      <Ethnicity>British</Ethnicity>
+      <Address1>TestAddress1</Address1>
+      <Address2>TestAddress Line 2</Address2>
+      <TownCity>TestTownCity</TownCity>
+      <County>TestCounty</County>
+      <PostCode>PX11PX</PostCode>
+      <EmailAddress></EmailAddress>
+      <MobileNumber>07123456789</MobileNumber>
+      <ContactPreference>SMS</ContactPreference>
+      <Password>TestPassword</Password>
+      <ConfirmPassword>TestPassword</ConfirmPassword>
+      <ResearchConsent>Yes</ResearchConsent>
+      <Terms>Yes</Terms>
+      <Expected_Results_Validation>EmailAddress</Expected_Results_Validation>
+    </TestCaseData>
+  </TestCase>
+  <TestCase id="3" title="RegistrationData" description="Validation triggered for Email Address DOB invalid day">
     <TestCaseData complete="true">
       <FirstName>TestUser</FirstName>
       <LastName>AutomationTest</LastName>
@@ -105,15 +68,13 @@
       <MobileNumber>07123456789</MobileNumber>
       <ContactPreference>SMS</ContactPreference>
       <Password>TestPassword</Password>
-      <PasswordConfirm>TestPassword</PasswordConfirm>
+      <ConfirmPassword>TestPassword</ConfirmPassword>
       <ResearchConsent>Yes</ResearchConsent>
       <Terms>Yes</Terms>
       <Expected_Results_Validation>EmailAddress, DateOfBirth</Expected_Results_Validation>
     </TestCaseData>
-
   </TestCase>
-  <TestCase id="4" title="RegistrationData" description = "Validation triggered for Email Address age 18 -1 day">
-
+  <TestCase id="4" title="RegistrationData" description="Validation triggered for Email Address age 18 -1 day">
     <TestCaseData complete="true">
       <FirstName>TestUser</FirstName>
       <LastName>AutomationTest</LastName>
@@ -132,12 +93,10 @@
       <MobileNumber>07123456789</MobileNumber>
       <ContactPreference>SMS</ContactPreference>
       <Password>TestPassword</Password>
-      <PasswordConfirm>TestPassword</PasswordConfirm>
+      <ConfirmPassword>TestPassword</ConfirmPassword>
       <ResearchConsent>Yes</ResearchConsent>
       <Terms>Yes</Terms>
       <Expected_Results_Validation>EmailAddress</Expected_Results_Validation>
     </TestCaseData>
-
   </TestCase>
-
 </Registration>

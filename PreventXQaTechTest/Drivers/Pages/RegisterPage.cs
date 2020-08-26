@@ -1,8 +1,11 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using PreventXQaTechTest.Drivers.Base;
 using PreventXQaTechTest.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -56,7 +59,7 @@ namespace PreventXQaTechTest.Drivers.Pages
         private By mobileNumberContainer = By.XPath("//input[@id='contentBody_txtMobileNumber']/..");
         private By mobileNumberErrorIcon = By.XPath("//input[@id='contentBody_txtMobileNumber']/../span[contains(@class,'glyphicon')]");
         private By contactPreferenceBothInput = By.Id("contentBody_radContactPreference_0");
-        private By contactPreferenceSmsInput = By.Id("contentBody_radContactPreference_1");
+        private By contactPreferenceSmsInput = By.XPath("//input[@id='contentBody_radContactPreference_1']/..");//Id("contentBody_radContactPreference_1");
         private By contactPreferenceEmailInput = By.Id("contentBody_radContactPreference_2");
         private By contactPreferenceContainer = By.XPath("//ul[@id='contentBody_radContactPreference']/..");
         private By contactPreferenceErrorIcon = By.XPath("//ul[@id='contentBody_radContactPreference']/../span[contains(@class,'glyphicon')]");
@@ -107,7 +110,7 @@ namespace PreventXQaTechTest.Drivers.Pages
             {
                 errorsDisplayed = false;
             }
-            if (!GetAttributeFromElement(firstNameContainer, "class").Contains("has-error has-feedback"))
+            if (GetAttributeFromElement(firstNameContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
@@ -142,7 +145,7 @@ namespace PreventXQaTechTest.Drivers.Pages
             {
                 errorsDisplayed = false;
             }
-            if (!GetAttributeFromElement(lastNameContainer, "class").Contains("has-error has-feedback"))
+            if (GetAttributeFromElement(lastNameContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
@@ -155,17 +158,13 @@ namespace PreventXQaTechTest.Drivers.Pages
 
             try
             {
-                SelectByTextFromDropdown(genderIdentitySelect, gender);
+                SelectByIndexFromDropdown(genderIdentitySelect, int.Parse(gender));
             }
-            catch (NoSuchElementException)
+            catch (Exception)
             {
                 logger.Info("Option not found, setting gender as free text");
                 SelectByTextFromDropdown(genderIdentitySelect, "Other Gender (free text)");
                 EnterText(genderFreeText, gender);
-            }
-            catch (Exception e)
-            {
-                logger.Error(e);
             }
         }
 
@@ -187,7 +186,7 @@ namespace PreventXQaTechTest.Drivers.Pages
 
         public void SelectAssignedSex(string assignedSex)
         {
-            SelectByTextFromDropdown(sexAssignedSelect, assignedSex);
+            SelectByIndexFromDropdown(sexAssignedSelect, int.Parse(assignedSex));
         }
 
         public bool AssignedSexCheckErrorIsDisplayed()
@@ -208,7 +207,7 @@ namespace PreventXQaTechTest.Drivers.Pages
 
         public void SelectPartnerSex(string partnerSex)
         {
-                SelectByTextFromDropdown(partnerSexSelect, partnerSex);
+                SelectByIndexFromDropdown(partnerSexSelect, int.Parse(partnerSex));
         }
 
         public bool PartnerSexCheckErrorIsDisplayed()
@@ -404,7 +403,7 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool EmailAddressCheckErrorIsDisplayed()
         {
             bool errorsDisplayed = true;
-            if (!GetAttributeFromElement(emailAddressContainer, "class").Contains("em has-error has-feedback"))
+            if (!GetAttributeFromElement(emailAddressContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
@@ -418,7 +417,7 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool EmailAddressCheckErrorIsNotDisplayed()
         {
             bool errorsDisplayed = true;
-            if (GetAttributeFromElement(emailAddressContainer, "class").Contains("em has-error has-feedback"))
+            if (GetAttributeFromElement(emailAddressContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
@@ -597,7 +596,8 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool TermsCheckErrorIsNotDisplayed()
         {
             bool errorsDisplayed = true;
-            if (GetAttributeFromElement(confirmPasswordContainer, "text").Contains("You must agree to our terms of use and privacy policy."))
+            string errorText = GetAttributeFromElement(confirmPasswordContainer, "text");
+            if (!String.IsNullOrEmpty(errorText) && errorText.Contains("You must agree to our terms of use and privacy policy."))
             {
                 errorsDisplayed = false;
             }
@@ -706,9 +706,199 @@ namespace PreventXQaTechTest.Drivers.Pages
             }
         }
 
-        public void FillRegisterFormFromTestData(int testCaseId)
+        public void CheckErrors(List<RegisterField> errorFields)
         {
-            //todo
+            if (errorFields.Contains(RegisterField.Address1))
+            {
+                Assert.True(Address1CheckErrorIsDisplayed(), "Expected Address 1 to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(Address1CheckErrorIsNotDisplayed(), "Expected no error for Address 1 but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.Address2))
+            {
+                logger.Error("Field Address 2 has no errors to check");
+            }
+
+            if (errorFields.Contains(RegisterField.AssignedSex))
+            {
+                Assert.True(AssignedSexCheckErrorIsDisplayed(), "Expected Assigned Sex to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(AssignedSexCheckErrorIsNotDisplayed(), "Expected no error for Assigned sex but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.ConfirmPassword))
+            {
+                Assert.True(ConfirmPasswordCheckErrorIsDisplayed(), "Expected Confirm Password to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(ConfirmPasswordCheckErrorIsNotDisplayed(), "Expected no error for Confirm Password but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.ContactPreference))
+            {
+                Assert.True(ContactMethodCheckErrorIsDisplayed(), "Expected Contact Preference to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(ContactMethodCheckErrorIsNotDisplayed(), "Expected no error for Contact Preference but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.CountryOfBirth))
+            {
+                logger.Error("Field Country Of Birth has no errors to check");
+            }
+
+            if (errorFields.Contains(RegisterField.County))
+            {
+                logger.Error("Field County has no errors to check");
+            }
+
+            if (errorFields.Contains(RegisterField.DateOfBirth))
+            {
+                Assert.True(DateOfBirthCheckErrorIsDisplayed(), "Expected Data of Birth to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(DateOfBirthCheckErrorIsNotDisplayed(), "Expected no error for Date of Birth but found one or more");
+            }
+           
+            if (errorFields.Contains(RegisterField.EmailAddress))
+            {
+                Assert.True(EmailAddressCheckErrorIsDisplayed(), "Expected Email Address to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(EmailAddressCheckErrorIsNotDisplayed(), "Expected no error for Email Address but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.Ethnicity))
+            {
+                Assert.True(EthnicityCheckErrorIsDisplayed(), "Expected Ethnicity to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(EthnicityCheckErrorIsNotDisplayed(), "Expected no error for Ethnicity but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.FirstName))
+            {
+                Assert.True(FirstNameCheckErrorIsDisplayed(), "Expected First Name to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(FirstNameCheckErrorIsNotDisplayed(), "Expected no error for First Name but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.Gender))
+            {
+                Assert.True(GenderIdentityCheckErrorIsDisplayed(), "Expected Gender to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(GenderIdentityCheckErrorIsNotDisplayed(), "Expected no error for Gender but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.LastName))
+            {
+                Assert.True(LastNameCheckErrorIsDisplayed(), "Expected Last Name to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(LastNameCheckErrorIsNotDisplayed(), "Expected no error for Last Name but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.MobileNumber))
+            {
+                Assert.True(MobileNumberCheckErrorIsDisplayed(), "Expected Mobile Number to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(MobileNumberCheckErrorIsNotDisplayed(), "Expected no error for Mobile Number but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.PartnerSex))
+            {
+                Assert.True(PartnerSexCheckErrorIsDisplayed(), "Expected Partner Sex to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(PartnerSexCheckErrorIsNotDisplayed(), "Expected no error for Partner Sex but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.Password))
+            {
+                Assert.True(PasswordCheckErrorIsDisplayed(), "Expected Password to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(PasswordCheckErrorIsNotDisplayed(), "Expected no error for Password but found one or more");
+            }
+                
+            if (errorFields.Contains(RegisterField.Postcode))
+            {
+                Assert.True(PostcodeCheckErrorIsDisplayed(), "Expected Postcode to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(PostcodeCheckErrorIsNotDisplayed(), "Expected no error for Postcode but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.TownCity))
+            {
+                Assert.True(TownCityCheckErrorIsDisplayed(), "Expected Town/City to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(TownCityCheckErrorIsNotDisplayed(), "Expected no error for Town/City but found one or more");
+            }
+
+            if (errorFields.Contains(RegisterField.ResearchConsent))
+            {
+                logger.Error("Field Country Of Birth has no errors to check");
+            }
+            
+            if (errorFields.Contains(RegisterField.Terms))
+            {
+                Assert.True(TermsCheckErrorIsDisplayed(), "Expected Terms to display error but not all parts were found");
+            }
+            else
+            {
+                Assert.True(TermsCheckErrorIsNotDisplayed(), "Expected no error for Terms but found one or more");
+            }
+        }
+    
+
+        public void FillRegisterFormFromTestData(Dictionary<string, string> registrationData)
+        {
+            foreach (KeyValuePair<string, string> entry in registrationData)
+            {
+                if (!String.IsNullOrWhiteSpace(entry.Value))
+                {
+                    RegisterField field = RegisterField.NotSet;
+                    
+                    try
+                    {
+                        field = (RegisterField)Enum.Parse(typeof(RegisterField), entry.Key, true);
+                    }
+                    catch (Exception)
+                    {
+                        if (entry.Key.ToLower().Contains("age"))
+                        {
+                            field = RegisterField.DateOfBirth;
+                        }
+                    }
+                    if (field != RegisterField.NotSet)
+                    {
+                        PopulateField(field, entry.Value);
+                    }
+                }
+            }
         }
     }
 }
