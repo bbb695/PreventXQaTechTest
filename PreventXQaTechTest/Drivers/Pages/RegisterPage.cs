@@ -43,7 +43,7 @@ namespace PreventXQaTechTest.Drivers.Pages
         private By address1ErrorIcon = By.XPath("//span[@id='contentBody_ctlContact_valAddress1']/span");
         private By address2Text = By.Id("contentBody_ctlContact_txtAddress2");
         private By townCityText = By.Id("contentBody_ctlContact_txtTownCity");
-        private By townCityContainer = By.XPath("//input[@id='contentBody_ctlContact_txtAddress2']/..");
+        private By townCityContainer = By.XPath("//input[@id='contentBody_ctlContact_txtTownCity']/..");
         private By townCityErrorIcon = By.XPath("//span[@id='contentBody_ctlContact_valTownCity']/span");
         private By countyText = By.Id("contentBody_ctlContact_txtCounty");
         private By postcodeText = By.Id("contentBody_ctlContact_txtPostCode");
@@ -66,7 +66,7 @@ namespace PreventXQaTechTest.Drivers.Pages
 
         //Your password
         private By passwordText = By.Id("contentBody_txtPassword");
-        private By passwordContainer = By.XPath("//input[@id='contentBody_txtPassword']/../..");
+        private By passwordContainer = By.XPath("//input[@id='contentBody_txtPassword']/..");
         private By passwordErrorIcon = By.XPath("//input[@id='contentBody_txtPassword']/../span[contains(@class,'glyphicon')]");
         private By passwordVerdict = By.XPath("//span[@class='password-verdict']");
         private By confirmPasswordText = By.Id("contentBody_txtPasswordConfirm");
@@ -246,7 +246,7 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool DateOfBirthCheckErrorIsDisplayed()
         {
             bool errorsDisplayed = true;
-            if (!GetAttributeFromElement(dobContainer, "class").Contains("row has-error has-feedback"))
+            if (!GetAttributeFromElement(dobContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
@@ -267,7 +267,7 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool EthnicityCheckErrorIsDisplayed()
         {
             bool errorsDisplayed = true;
-            if (!GetAttributeFromElement(ethnicityContainer, "class").Contains("form-group has-error has-feedback"))
+            if (!GetAttributeFromElement(ethnicityContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
@@ -294,11 +294,11 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool Address1CheckErrorIsDisplayed()
         {
             bool errorsDisplayed = true;
-            if (!GetAttributeFromElement(address1Container, "class").Contains("col-sm-9 has-error has-feedback"))
+            if (!GetAttributeFromElement(address1Container, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
-            if (!GetAttributeFromElement(address1ErrorIcon, "style").Contains("visibility: visible;"))
+            if (!GetAttributeFromElement(address1ErrorIcon, "style").Contains("display: block;"))
             {
                 errorsDisplayed = false;
             }
@@ -308,11 +308,11 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool Address1CheckErrorIsNotDisplayed()
         {
             bool errorsDisplayed = true;
-            if (GetAttributeFromElement(address1Container, "class").Contains("col-sm-9 has-error has-feedback"))
+            if (GetAttributeFromElement(address1Container, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
-            if (GetAttributeFromElement(address1ErrorIcon, "style").Contains("visibility: visible;"))
+            if (GetAttributeFromElement(address1ErrorIcon, "style").Contains("display: block;"))
             {
                 errorsDisplayed = false;
             }
@@ -332,11 +332,11 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool TownCityCheckErrorIsDisplayed()
         {
             bool errorsDisplayed = true;
-            if (!GetAttributeFromElement(townCityContainer, "class").Contains("col-sm-9 has-error has-feedback"))
+            if (!GetAttributeFromElement(townCityContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
-            if (!GetAttributeFromElement(townCityErrorIcon, "style").Contains("visibility: visible;"))
+            if (!GetAttributeFromElement(townCityErrorIcon, "style").Contains("display: block;"))
             {
                 errorsDisplayed = false;
             }
@@ -346,11 +346,11 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool TownCityCheckErrorIsNotDisplayed()
         {
             bool errorsDisplayed = true;
-            if (GetAttributeFromElement(townCityContainer, "class").Contains("col-sm-9 has-error has-feedback"))
+            if (GetAttributeFromElement(townCityContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
-            if (GetAttributeFromElement(townCityErrorIcon, "style").Contains("visibility: visible;"))
+            if (GetAttributeFromElement(townCityErrorIcon, "style").Contains("display: block;"))
             {
                 errorsDisplayed = false;
             }
@@ -370,11 +370,11 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool PostcodeCheckErrorIsDisplayed()
         {
             bool errorsDisplayed = true;
-            if (!GetAttributeFromElement(townCityContainer, "class").Contains("col-sm-9 has-error has-feedback"))
+            if (!GetAttributeFromElement(postcodeContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
-            if (!GetAttributeFromElement(townCityErrorIcon, "style").Contains("visibility: visible;"))
+            if (!GetAttributeFromElement(postcodeErrorIcon, "style").Contains("display: block;"))
             {
                 errorsDisplayed = false;
             }
@@ -384,11 +384,11 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool PostcodeCheckErrorIsNotDisplayed()
         {
             bool errorsDisplayed = true;
-            if (GetAttributeFromElement(townCityContainer, "class").Contains("col-sm-9 has-error has-feedback"))
+            if (GetAttributeFromElement(postcodeContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
-            if (GetAttributeFromElement(townCityErrorIcon, "style").Contains("visibility: visible;"))
+            if (GetAttributeFromElement(postcodeErrorIcon, "style").Contains("display: block;"))
             {
                 errorsDisplayed = false;
             }
@@ -481,7 +481,7 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool ContactMethodCheckErrorIsDisplayed()
         {
             bool errorsDisplayed = true;
-            if (!GetAttributeFromElement(contactPreferenceContainer, "class").Contains("form-group has-error has-feedback"))
+            if (!GetAttributeFromElement(contactPreferenceContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
@@ -495,7 +495,7 @@ namespace PreventXQaTechTest.Drivers.Pages
         public bool ContactMethodCheckErrorIsNotDisplayed()
         {
             bool errorsDisplayed = true;
-            if (GetAttributeFromElement(contactPreferenceContainer, "class").Contains("form-group has-error has-feedback"))
+            if (GetAttributeFromElement(contactPreferenceContainer, "class").Contains("has-error has-feedback"))
             {
                 errorsDisplayed = false;
             }
@@ -584,13 +584,20 @@ namespace PreventXQaTechTest.Drivers.Pages
 
         public bool TermsCheckErrorIsDisplayed()
         {
-            bool errorsDisplayed = true;
-            if (!GetAttributeFromElement(confirmPasswordContainer, "text").Contains("You must agree to our terms of use and privacy policy."))
+            try
             {
-                errorsDisplayed = false;
+                bool errorsDisplayed = true;
+                if (!GetAttributeFromElement(registerErrorMessage, "text").Contains("You must agree to our terms of use and privacy policy."))
+                {
+                    errorsDisplayed = false;
+                }
+
+                return errorsDisplayed;
             }
-            
-            return errorsDisplayed;
+            catch
+            {
+                return false;
+            }
         }
 
         public bool TermsCheckErrorIsNotDisplayed()

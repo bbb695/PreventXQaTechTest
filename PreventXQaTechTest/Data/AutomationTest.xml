@@ -71,7 +71,7 @@
       <ConfirmPassword>TestPassword</ConfirmPassword>
       <ResearchConsent>Yes</ResearchConsent>
       <Terms>Yes</Terms>
-      <Expected_Results_Validation>EmailAddress, DateOfBirth</Expected_Results_Validation>
+      <Expected_Results_Validation>EmailAddress</Expected_Results_Validation>
     </TestCaseData>
   </TestCase>
   <TestCase id="4" title="RegistrationData" description="Validation triggered for Email Address age 18 -1 day">
@@ -97,6 +97,12 @@
       <ResearchConsent>Yes</ResearchConsent>
       <Terms>Yes</Terms>
       <Expected_Results_Validation>EmailAddress</Expected_Results_Validation>
+    </TestCaseData>
+  </TestCase>
+
+  <TestCase id="5" title="RegistrationData" description="Empty form">
+    <TestCaseData complete="true">
+      <Expected_Results_Validation>EmailAddress, FirstName, LastName, Gender, AssignedSex, PartnerSex, DateOfBirth, Ethnicity, Address1, Address2, TownCity, County, PostCode, ContactPreference, Password</Expected_Results_Validation>
     </TestCaseData>
   </TestCase>
 </Registration>

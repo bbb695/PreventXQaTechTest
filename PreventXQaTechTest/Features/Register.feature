@@ -21,3 +21,9 @@ Given the register page is displayed
 	And the data from test case 3 is entered
 	When the Register button is clicked
 	Then the correct fields should display an error
+
+Scenario: Empty form
+Given the register page is displayed
+	And the data from test case 5 is entered
+	When the Register button is clicked
+	Then the correct fields should display an error
